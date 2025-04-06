@@ -1,10 +1,13 @@
 import Webcam from "./components/Webcam"
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <h1>Controle de Entrada de Pessoas</h1>
-      <Webcam />
+      <Routes>
+        <Route path="/" element={<h1>Controle de Entrada de Pessoas</h1>} />
+        <Route path="/webcam" element={<Webcam />} />
+      </Routes>
     </>
   )
 }

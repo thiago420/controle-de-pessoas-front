@@ -56,7 +56,7 @@ const Webcam = () => {
       }
       setMediaStream(stream);
     } catch (error) {
-      console.error("Error accessing webcam", error);
+      alert(`Webcam access denied. Please allow access to use the webcam. ${error}`);
     }
   };
 
