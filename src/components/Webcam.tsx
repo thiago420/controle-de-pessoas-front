@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
+import axios from "axios"; // Importando o axios
 
 // Styled components
 const WebcamContainer = styled.div`
@@ -43,6 +44,7 @@ const Webcam = () => {
 
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
+  const [isUploading, setIsUploading] = useState(false); // Estado para controlar o upload
 
   const startWebcam = async () => {
     try {
@@ -94,6 +96,42 @@ const Webcam = () => {
     }
   };
 
+  const uploadImages = async () => {
+    if (capturedImages.length === 0) return;
+
+    const formData = new FormData();
+    capturedImages.forEach((image, index) => {
+      const blob = dataURLToBlob(image);
+      formData.append(`images`, blob, `image_${index}.jpg`);
+    });
+
+    try {
+      setIsUploading(true);
+      await axios.post("<YOUR_ENDPOINT_URL>", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("Images uploaded successfully!");
+    } catch (error) {
+      alert(`Failed to upload images: ${error}`);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const dataURLToBlob = (dataURL: string): Blob => {
+    const byteString = atob(dataURL.split(",")[1]);
+    const mimeString = dataURL.split(",")[0].split(":")[1].split(";")[0];
+    const arrayBuffer = new Uint8Array(byteString.length);
+
+    for (let i = 0; i < byteString.length; i++) {
+      arrayBuffer[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([arrayBuffer], { type: mimeString });
+  };
+
   const resetState = () => {
     stopWebcam();
     setCapturedImages([]);
@@ -106,6 +144,9 @@ const Webcam = () => {
           {capturedImages.map((img, index) => (
             <PreviewImg key={index} src={img} alt={`Captured ${index}`} />
           ))}
+          <WebcamButton onClick={uploadImages} disabled={isUploading}>
+            {isUploading ? "Uploading..." : "Upload Images"}
+          </WebcamButton>
           <WebcamButton onClick={resetState}>Reset</WebcamButton>
         </>
       ) : (
