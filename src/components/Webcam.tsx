@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
-
 import styled from "styled-components";
 
-// Define styled components for styling
+// Styled components
 const WebcamContainer = styled.div`
   position: relative;
   width: 100%;
@@ -18,17 +17,16 @@ const WebcamVideo = styled.video`
 const PreviewImg = styled.img`
   width: 100%;
   border-radius: 10px;
+  margin-bottom: 10px;
 `;
 
 const WebcamCanvas = styled.canvas`
-  display: none; /* Hide canvas by default */
+  display: none;
 `;
 
 const WebcamButton = styled.button`
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  margin-top: 10px;
   background-color: #fff;
   color: #333;
   border: none;
@@ -44,13 +42,11 @@ const Webcam = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [capturedImages, setCapturedImages] = useState<string[]>([]);
 
   const startWebcam = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
@@ -60,65 +56,66 @@ const Webcam = () => {
     }
   };
 
-  // Function to stop the webcam
   const stopWebcam = () => {
     if (mediaStream) {
-      mediaStream.getTracks().forEach((track) => {
-        track.stop();
-      });
+      mediaStream.getTracks().forEach((track) => track.stop());
       setMediaStream(null);
     }
   };
 
-  const captureImage = () => {
+  const captureMultipleImages = () => {
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current;
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
 
-      // Set canvas dimensions to match video stream
       if (context && video.videoWidth && video.videoHeight) {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
-        // Draw video frame onto canvas
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const images: string[] = [];
+        let count = 0;
+        const maxImages = 30;
+        const intervalTime = 50;
 
-        // Get image data URL from canvas
-        const imageDataUrl = canvas.toDataURL("image/jpeg");
+        const intervalId = setInterval(() => {
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const imageDataUrl = canvas.toDataURL("image/jpeg");
+          images.push(imageDataUrl);
+          count++;
 
-        // Set the captured image
-        setCapturedImage(imageDataUrl);
-
-        // Stop the webcam
-        stopWebcam();
-
-        // You can do something with the captured image here, like save it to state or send it to a server
+          if (count >= maxImages) {
+            clearInterval(intervalId);
+            setCapturedImages(images);
+            stopWebcam();
+          }
+        }, intervalTime);
       }
     }
   };
 
-  // Function to reset state (clear media stream and refs)
   const resetState = () => {
-    stopWebcam(); // Stop the webcam if it's active
-    setCapturedImage(null); // Reset captured image
+    stopWebcam();
+    setCapturedImages([]);
   };
 
   return (
     <WebcamContainer>
-      {capturedImage ? (
+      {capturedImages.length > 0 ? (
         <>
-          <PreviewImg src={capturedImage} className="captured-image" />
+          {capturedImages.map((img, index) => (
+            <PreviewImg key={index} src={img} alt={`Captured ${index}`} />
+          ))}
           <WebcamButton onClick={resetState}>Reset</WebcamButton>
         </>
       ) : (
         <>
           <WebcamVideo ref={videoRef} autoPlay muted />
           <WebcamCanvas ref={canvasRef} />
-          {!videoRef.current ? (
+          {!mediaStream ? (
             <WebcamButton onClick={startWebcam}>Start Webcam</WebcamButton>
           ) : (
-            <WebcamButton onClick={captureImage}>Capture Image</WebcamButton>
+            <WebcamButton onClick={captureMultipleImages}>Capture Images</WebcamButton>
           )}
         </>
       )}
@@ -127,3 +124,86 @@ const Webcam = () => {
 };
 
 export default Webcam;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
