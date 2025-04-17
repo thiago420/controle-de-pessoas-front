@@ -12,12 +12,10 @@ const WebcamContainer = styled.div`
 
 const WebcamVideo = styled.video`
   width: 100%;
-  border-radius: 10px;
 `;
 
 const PreviewImg = styled.img`
   width: 100%;
-  border-radius: 10px;
   margin-bottom: 10px;
 `;
 
@@ -34,7 +32,7 @@ const WebcamButton = styled.button`
   border-radius: 20px;
   padding: 10px 20px;
   font-size: 16px;
-  cursor: pointer;
+  cursor: pointer;  
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -44,7 +42,9 @@ const Webcam = () => {
 
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
-  const [isUploading, setIsUploading] = useState(false); // Estado para controlar o upload
+  const [isUploading, setIsUploading] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [textoCapturando, setTextoCapturando] = useState('');
 
   const startWebcam = async () => {
     try {
@@ -66,6 +66,8 @@ const Webcam = () => {
   };
 
   const captureMultipleImages = () => {
+    setImageIndex(0);
+
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current;
       const canvas = canvasRef.current;
@@ -143,9 +145,21 @@ const Webcam = () => {
     <WebcamContainer>
       {capturedImages.length > 0 ? (
         <>
-          {capturedImages.map((img, index) => (
+          {/* {capturedImages.map((img, index) => (
             <PreviewImg key={index} src={img} alt={`Captured ${index}`} />
-          ))}
+          ))} */}
+          {capturedImages.length > 0 ? (
+            <PreviewImg
+              key={imageIndex}
+              src={capturedImages[imageIndex]}
+              alt={`Captured ${imageIndex}`}
+            />
+          ) : null}
+          <span>Nome do arquivo: image_{imageIndex}.jpg</span>
+          <br />
+          <WebcamButton onClick={() => setImageIndex(prev => ((prev + capturedImages.length - 1) % capturedImages.length))}>Anterior</WebcamButton>
+          <WebcamButton onClick={() => setImageIndex(prev => ((prev + 1) % capturedImages.length))}>Próximo</WebcamButton>
+          <br />
           <WebcamButton onClick={uploadImages} disabled={isUploading}>
             {isUploading ? "Uploading..." : "Upload Images"}
           </WebcamButton>
