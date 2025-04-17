@@ -102,12 +102,13 @@ const Webcam = () => {
     const formData = new FormData();
     capturedImages.forEach((image, index) => {
       const blob = dataURLToBlob(image);
-      formData.append(`images`, blob, `image_${index}.jpg`);
+      // Use uma chave única para cada imagem
+      formData.append(`images[${index}]`, blob, `image_${index}.jpg`);
     });
 
     try {
       setIsUploading(true);
-      await axios.post("<YOUR_ENDPOINT_URL>", formData, {
+      await axios.post("https://eomslslji647wxj.m.pipedream.net", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
