@@ -108,7 +108,8 @@ const Webcam = () => {
 
     try {
       setIsUploading(true);
-      await axios.post("https://eomslslji647wxj.m.pipedream.net", formData, {
+      // Se quiser testar utilize ou uma API local ou o site Pipedream
+      await axios.post("https://your-api-url.com/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
