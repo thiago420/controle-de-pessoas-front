@@ -1,6 +1,4 @@
-import React from 'react'
-
-import Webcam from '../../components/Webcam'
+import Webcam from '../../components/Webcam';
 
 import { Container, Body } from './styles';
 
