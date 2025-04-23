@@ -10,11 +10,3 @@ export const Container = styled.div`
 	background-color: #f0f0f0;
 	gap: 20px;
 `;
-
-export const LinksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-`;

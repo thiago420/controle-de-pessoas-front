@@ -16,9 +16,22 @@ export const Body = styled.div`
 	background-color: #f0f0f0;
 	padding: 20px;
 	border-radius: 20px;
+	gap: 20px;
 
 	h1 {
 		margin: 0;
 		padding: 0;
+	}
+`;
+
+
+export const Title = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+
+	h1 {
+		font-family: Arial, sans-serif;
 	}
 `;
