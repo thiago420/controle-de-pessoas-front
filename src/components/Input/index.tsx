@@ -8,7 +8,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<InputProps> = ({label, ...rest}) => {
 	return (
 		<Container>
-			<Label>{label}</Label>
+			<div style={{ width: '100%', margin: '10px 0' }}>
+				<Label>{label}</Label>
+			</div>
 			<InputStyled
 				type="text"
 				placeholder="Digite o nome do arquivo"

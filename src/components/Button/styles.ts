@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const ButtonStyled = styled.button`
   width: 100%;
 	height: 40px;
-	border-radius: 20px;
+	border-radius: 10px;
 	border: 1px solid #ccc;
 	background-color:rgb(0, 81, 255);
 	font-size: 16px;

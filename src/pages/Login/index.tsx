@@ -1,19 +1,32 @@
-import Input from '../../components/Input';
-import NavLink from '../../components/NavLink';
-import { Container, LinksContainer } from './styles';
-import Button from '../../components/Button';
 import React from 'react';
+import Input from '../../components/Input';
+import { NavLink } from 'react-router-dom';
+import { Card, Container } from './styles';
+import Button from '../../components/Button';
 
 const Login = () => {
   return (
     <Container>
-      <Input label="Usuário" placeholder="Digite seu nome de usuário" />
-      <Input label="Senha" type="password" placeholder="Digite sua senha" />
-      <Button text="Entrar" />
-      <LinksContainer>
-        <NavLink text='Esqueci minha senha' to="/forgot-password" />
-        <NavLink text='Não possui uma conta?' to="/register" />
-      </LinksContainer>
+      <Card>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '25px' }}>
+          <h3>Bem-Vindo à FacePass</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+            <span>Não tem conta?</span>
+            <span>Cadastre-se</span>
+          </div>
+        </div>
+        <div style={{ width: '100%', marginBottom: '20px' }}>
+          <h1>Login</h1>
+        </div>
+        <Input label="Insira seu e-mail" placeholder="exemplo@exemplo" />
+        <Input label="Insira sua senha" type="password" placeholder="senha" />
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'row-reverse', }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <NavLink to="/recuperar-senha">Esqueci minha senha</NavLink>
+          </div>
+        </div>
+        <Button text="Entrar" />
+      </Card>
     </Container>
   )
 }
