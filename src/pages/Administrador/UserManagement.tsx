@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type User = {
   id: number;
@@ -15,6 +16,7 @@ const UserManagement = () => {
   const [editingUserId, setEditingUserId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const navigate = useNavigate(); // Hook para navegação
 
   const [newUser, setNewUser] = useState<Omit<User, 'id'>>({
     name: '',
@@ -91,9 +93,12 @@ const UserManagement = () => {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <header style={{ background: '#0b0e1b', color: '#fff', padding: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+      <header style={{ background: '#0b0e1b', color: '#fff', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h2>Gerenciamento de Usuários</h2>
-        <div>Administrador</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <button onClick={() => navigate('/menu-administrador')}>← Voltar para Menu Administrador</button>
+          <span>Administrador</span>
+        </div>
       </header>
 
       <div style={{ display: 'flex', alignItems: 'center', margin: '1rem 0' }}>
@@ -119,38 +124,10 @@ const UserManagement = () => {
         <div style={{ marginBottom: '1rem' }}>
           {error && <p style={{ color: 'red' }}>{error}</p>}
 
-          <input
-            placeholder="Nome"
-            value={newUser.name}
-            onChange={(e) => {
-              setNewUser({ ...newUser, name: e.target.value });
-              setError(null);
-            }}
-          />
-          <input
-            placeholder="Email"
-            value={newUser.email}
-            onChange={(e) => {
-              setNewUser({ ...newUser, email: e.target.value });
-              setError(null);
-            }}
-          />
-          <input
-            placeholder="CPF"
-            value={newUser.cpf}
-            onChange={(e) => {
-              setNewUser({ ...newUser, cpf: e.target.value });
-              setError(null);
-            }}
-          />
-          <input
-            placeholder="Telefone"
-            value={newUser.phone}
-            onChange={(e) => {
-              setNewUser({ ...newUser, phone: e.target.value });
-              setError(null);
-            }}
-          />
+          <input placeholder="Nome" value={newUser.name} onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} />
+          <input placeholder="Email" value={newUser.email} onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} />
+          <input placeholder="CPF" value={newUser.cpf} onChange={(e) => setNewUser({ ...newUser, cpf: e.target.value })} />
+          <input placeholder="Telefone" value={newUser.phone} onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })} />
 
           <div style={{ marginTop: '0.5rem' }}>
             <button onClick={handleSaveUser}>

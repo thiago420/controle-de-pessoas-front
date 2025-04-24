@@ -8,6 +8,12 @@ import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
 import EmailEnviado from './pages/RecuperarSenha/EmailEnviado';
 import Relatorios from './pages/Administrador/relatorio';
 import Home from './pages/Home';
+import RelatorioDetalhado from './pages/Administrador/RelatorioDetalhado';
+import MenuAdministrador from './pages/Administrador/MenuAdministrador';
+import Alertas from './pages/Administrador/Alertas';
+import Usuario from './pages/Usuario/Usuario';
+import EditarUsuario from './pages/Usuario/EditarUsuario';
+import EditarEndereco from './pages/Usuario/EditarEndereco';
 function App() {
   return (
     <>
@@ -20,7 +26,12 @@ function App() {
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
         <Route path="/email-enviado" element={<EmailEnviado />} />
         <Route path="/relatorio" element={<Relatorios />} />
-        <Route path="/relatorio-detalhado" element={<Relatorios />} />
+        <Route path="/relatorio-detalhado" element={<RelatorioDetalhado />} />
+        <Route path="/alerta" element={<Alertas />} />
+        <Route path="/menu-administrador" element={<MenuAdministrador />} />
+        <Route path="/usuario" element={<Usuario />} />
+        <Route path="/editar-usuario" element={<EditarUsuario />} />
+        <Route path="/editar-endereco" element={<EditarEndereco />} />
         <Route path='/home' element={<Home />} />
       </Routes>
     </>

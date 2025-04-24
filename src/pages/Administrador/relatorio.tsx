@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Relatorio {
   id: string;
@@ -10,11 +11,12 @@ interface Relatorio {
 }
 
 export default function Relatorios() {
+  const navigate = useNavigate();
+
   const todosRelatorios: Relatorio[] = [
     { id: '00365', dataInicio: '2025-04-25', dataFim: '2025-04-25', tentativas: 1873, sucessos: 1800, naoIdentificados: 73 },
     { id: '00364', dataInicio: '2025-04-24', dataFim: '2025-04-24', tentativas: 1200, sucessos: 1150, naoIdentificados: 50 },
     { id: '00363', dataInicio: '2025-04-23', dataFim: '2025-04-23', tentativas: 980, sucessos: 930, naoIdentificados: 50 },
-    // Adicione mais relatórios conforme necessário
   ];
 
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
@@ -26,13 +28,15 @@ export default function Relatorios() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Cabeçalho */}
-      <div className="bg-black text-white p-4 flex justify-between items-center">
-        <div className="text-xl font-semibold">Relatórios</div>
-        <div className="text-sm">Administrador</div>
-      </div>
+      {/* Cabeçalho padronizado */}
+      <header style={{ background: '#0b0e1b', color: '#fff', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h2>Relatórios</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <button onClick={() => navigate('/menu-administrador')}>← Voltar para Menu Administrador</button>
+          <span>Administrador</span>
+        </div>
+      </header>
 
-      {/* Conteúdo */}
       <div className="p-6">
         <h1 className="text-lg font-semibold mb-4">Dia: 2025-04-25</h1>
 
@@ -46,7 +50,7 @@ export default function Relatorios() {
           </button>
         </div>
 
-        {/* Seção de filtros */}
+        {/* Filtros */}
         {mostrarFiltros && (
           <div className="mb-4 bg-white p-4 rounded shadow">
             <label className="block text-sm font-medium mb-1">
