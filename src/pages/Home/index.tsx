@@ -4,7 +4,7 @@ import { TbWorld } from "react-icons/tb";
 import { MdOutlineLock } from "react-icons/md";
 import { BsPersonCircle } from "react-icons/bs";
 import { RxCalendar } from "react-icons/rx";
-import { Grid1, Grid2, Grid3, Header, Main } from './styles';
+import { Footer, Grid1, Grid2, Grid3, Header, Main } from './styles';
 
 const Home = () => {
 	return (
@@ -134,6 +134,16 @@ const Home = () => {
 					</Grid3>
 				</div>
 			</Main>
+			<Footer>
+				<div>
+					<span>Entre em contato</span>
+					<span>+55 (48) 9 4002-8922</span>
+				</div>
+				<div>
+					<span>Entre em contato</span>
+					<span>Av. Marcolino Martins Cabral, 184 - Centro, Tubarão - SC, 88701-001</span>
+				</div> 
+			</Footer>
 		</>
 	)
 }

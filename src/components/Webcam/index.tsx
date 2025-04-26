@@ -45,8 +45,8 @@ const Webcam = () => {
 
         const images: string[] = [];
         let count = 0;
-        const maxImages = 30;
-        const intervalTime = 50;
+        const maxImages = 10;
+        const intervalTime = 100;
 
         const intervalId = setInterval(() => {
           context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -64,31 +64,55 @@ const Webcam = () => {
     }
   };
 
-  const uploadImages = async () => {
+  const uploadImages = async (isRegister: boolean) => {
     if (capturedImages.length === 0) return;
 
     const formData = new FormData();
+    formData.append('usuario_id', '1');
     capturedImages.forEach((image, index) => {
       const blob = dataURLToBlob(image);
-      // Use uma chave única para cada imagem
-      formData.append(`images[${index}]`, blob, `image_${index}.jpg`);
+      const file = new File([blob], `frame_${index}.jpg`, { type: 'image/jpeg' });
+      formData.append('frames', file);
     });
 
-    try {
-      setIsUploading(true);
-      // Se quiser testar utilize ou uma API local ou o site Pipedream
-      await axios.post("https://your-api-url.com/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      alert("Images uploaded successfully!");
-    } catch (error) {
-      alert(`Failed to upload images: ${error}`);
-    } finally {
-      setIsUploading(false);
+    if (isRegister) {
+      try {
+        setIsUploading(true);
+        await axios.post("http://127.0.0.1:8000/api/faces/register/", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        alert("Face registered successfully!");
+      } catch (error) {
+        alert(`Error registering face: ${error}`);
+      } finally {
+        setIsUploading(false);
+      }
+
+    } else {
+      try {
+        setIsUploading(true);
+
+        const response = await axios.post("http://127.0.0.1:8000/api/faces/validar/", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        if (response.data.success) {
+          alert("Face validated successfully!");
+        } else {
+          alert(response.data.message);
+        }
+
+      } catch (error) {
+        alert(`Error validating face: ${error}`);
+      } finally {
+        setIsUploading(false);
+      }
     }
-  };
+  }
 
   const dataURLToBlob = (dataURL: string): Blob => {
     const byteString = atob(dataURL.split(",")[1]);
@@ -124,8 +148,11 @@ const Webcam = () => {
             <WebcamButton onClick={() => setImageIndex(prev => ((prev + 1) % capturedImages.length))}>Próximo</WebcamButton>
           </div>
           <div>
-            <WebcamButton onClick={uploadImages} disabled={isUploading}>
-              {isUploading ? "Uploading..." : "Upload Images"}
+            <WebcamButton onClick={() => {uploadImages(true);}} disabled={isUploading}>
+              {isUploading ? "Uploading..." : "Register Face"}
+            </WebcamButton>
+            <WebcamButton onClick={() => {uploadImages(false);}} disabled={isUploading}>
+              {isUploading ? "Uploading..." : "Validar Face"}
             </WebcamButton>
             <WebcamButton onClick={resetState}>Reset</WebcamButton>
           </div>

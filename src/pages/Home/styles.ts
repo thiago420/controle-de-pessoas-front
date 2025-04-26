@@ -137,11 +137,11 @@ export const Grid3 = styled.div`
 
 export const Footer = styled.footer`
 	display: flex;
-	flex-direction: row;
-  justify-content: space-between;
+	flex-direction: column;
+  	gap: 20px;
 	align-items: center;
 	padding: 30px 35px;
 	width: 100%;
-	background-color: #0B1321;
+	background-color: #413838;
 	font-family: 'Inter';
 `;
