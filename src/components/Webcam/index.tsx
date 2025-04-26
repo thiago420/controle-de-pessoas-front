@@ -1,16 +1,19 @@
 import { useState, useRef } from "react";
-import { WebcamContainer, WebcamVideo, WebcamCanvas, PreviewImg, WebcamButton } from "./styles";
+import { WebcamContainer, WebcamVideo, WebcamCanvas, PreviewImg, WebcamButton, WebcamInput } from "./styles";
 import axios from "axios";
 import React from 'react';
 
 const Webcam = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const idUsuarioRef = useRef<HTMLInputElement>(null);
 
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [isRegister, setIsRegister] = useState<boolean>(false);
   const [imageIndex, setImageIndex] = useState(0);
+  
 
   const startWebcam = async () => {
     try {
@@ -66,9 +69,13 @@ const Webcam = () => {
 
   const uploadImages = async (isRegister: boolean) => {
     if (capturedImages.length === 0) return;
+    if (!idUsuarioRef.current?.value) {
+      alert("Por favor, insira o ID do usuário.");
+      return;
+    }
 
     const formData = new FormData();
-    formData.append('usuario_id', '1');
+    formData.append('usuario_id', idUsuarioRef.current?.value);
     capturedImages.forEach((image, index) => {
       const blob = dataURLToBlob(image);
       const file = new File([blob], `frame_${index}.jpg`, { type: 'image/jpeg' });
@@ -77,6 +84,7 @@ const Webcam = () => {
 
     if (isRegister) {
       try {
+        setIsRegister(true);
         setIsUploading(true);
         await axios.post("http://127.0.0.1:8000/api/faces/register/", formData, {
           headers: {
@@ -92,6 +100,7 @@ const Webcam = () => {
 
     } else {
       try {
+        setIsRegister(false);
         setIsUploading(true);
 
         const response = await axios.post("http://127.0.0.1:8000/api/faces/validar/", formData, {
@@ -142,19 +151,30 @@ const Webcam = () => {
               alt={`Captured ${imageIndex}`}
             />
           ) : null}
-          <span>Nome do arquivo: image_{imageIndex}.jpg</span>
-          <div>
+          <span>Nome do arquivo: frame_{imageIndex}.jpg</span>
+          <div style={{ display: 'flex', gap: '10px' }}>
             <WebcamButton onClick={() => setImageIndex(prev => ((prev + capturedImages.length - 1) % capturedImages.length))}>Anterior</WebcamButton>
             <WebcamButton onClick={() => setImageIndex(prev => ((prev + 1) % capturedImages.length))}>Próximo</WebcamButton>
           </div>
-          <div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px 0' }}>
+            <span>ID Usuário</span>
+            <WebcamInput
+              type="number" 
+              maxLength={4}
+              max={9999} 
+              min={1} 
+              ref={idUsuarioRef}
+              placeholder="ID"
+            />
+          </div>
+          <div style={{ display: 'flex', gap: '10px' }}>
             <WebcamButton onClick={() => {uploadImages(true);}} disabled={isUploading}>
-              {isUploading ? "Uploading..." : "Register Face"}
+              {isUploading && isRegister ? "Enviando..." : "Registrar Face"}
             </WebcamButton>
             <WebcamButton onClick={() => {uploadImages(false);}} disabled={isUploading}>
-              {isUploading ? "Uploading..." : "Validar Face"}
+              {isUploading && !isRegister ? "Enviando..." : "Validar Face"}
             </WebcamButton>
-            <WebcamButton onClick={resetState}>Reset</WebcamButton>
+            <WebcamButton onClick={resetState}>Resetar</WebcamButton>
           </div>
         </>
       ) : (
@@ -162,9 +182,9 @@ const Webcam = () => {
           <WebcamVideo ref={videoRef} autoPlay muted />
           <WebcamCanvas ref={canvasRef} />
           {!mediaStream ? (
-            <WebcamButton onClick={startWebcam}>Start Webcam</WebcamButton>
+            <WebcamButton onClick={startWebcam}>Iniciar Camera</WebcamButton>
           ) : (
-            <WebcamButton onClick={captureMultipleImages}>Capture Images</WebcamButton>
+            <WebcamButton onClick={captureMultipleImages}>Capturar Imagem</WebcamButton>
           )}
         </>
       )}
