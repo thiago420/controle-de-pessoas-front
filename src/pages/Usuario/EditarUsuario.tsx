@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container, Header, Main, ImageUser, Input, Button, ButtonGroup } from './styles';
 
 export default function EditarUsuario() {
   const navigate = useNavigate();
@@ -18,30 +19,30 @@ export default function EditarUsuario() {
   };
 
   return (
-    <div>
-      <header>
+    <Container>
+      <Header>
         <h2>Editar Usuário</h2>
-      </header>
+      </Header>
 
-      <main>
-        <img src="https://via.placeholder.com/100" alt="Foto do usuário" />
+      <Main>
+        <ImageUser src="https://via.placeholder.com/100" alt="Foto do usuário" />
 
-        <input placeholder="Nome" />
-        <input placeholder="E-mail" />
-        <input placeholder="Número celular" />
-        <input placeholder="CPF" />
+        <Input placeholder="Nome" />
+        <Input placeholder="E-mail" />
+        <Input placeholder="Número celular" />
+        <Input placeholder="CPF" />
 
-        <button onClick={() => navigate('/editar-endereco')}>
+        <Button onClick={() => navigate('/editar-endereco')}>
           Alterar endereço
-        </button>
+        </Button>
 
-        <div>
-          <button onClick={handleSalvar}>SALVAR</button>
-          <button onClick={() => navigate(-1)}>CANCELAR</button>
-        </div>
+        <ButtonGroup>
+          <Button onClick={handleSalvar}>SALVAR</Button>
+          <Button onClick={() => navigate(-1)}>CANCELAR</Button>
+        </ButtonGroup>
 
-        <button onClick={handleExcluirConta}>EXCLUIR CONTA</button>
-      </main>
-    </div>
+        <Button danger onClick={handleExcluirConta}>EXCLUIR CONTA</Button>
+      </Main>
+    </Container>
   );
 }

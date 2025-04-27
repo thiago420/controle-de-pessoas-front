@@ -1,31 +1,32 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container, Header, Main, Section, Title, Info, ImageUser, Button } from './styles';
 
 export default function Usuario() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <header>
+    <Container>
+      <Header>
         <h2>Usuário</h2>
-        <button onClick={() => navigate(-1)}>Voltar</button>
-      </header>
+        <Button onClick={() => navigate(-1)}>Voltar</Button>
+      </Header>
 
-      <main>
-        <section>
-          <h3>Seus dados pessoais</h3>
-          <p>Nome: Delia Costa</p>
-          <p>E-mail: deliacosta@gmail.com</p>
-          <p>CPF: 123.456.789-00</p>
-          <p>Telefone: +55 (48) 1234-5678</p>
-          <p>Sua foto:</p>
-          <img src="https://via.placeholder.com/100" alt="Foto do usuário" />
-        </section>
+      <Main>
+        <Section>
+          <Title>Seus dados pessoais</Title>
+          <Info>Nome: Delia Costa</Info>
+          <Info>E-mail: deliacosta@gmail.com</Info>
+          <Info>CPF: 123.456.789-00</Info>
+          <Info>Telefone: +55 (48) 1234-5678</Info>
+          <Info>Sua foto:</Info>
+          <ImageUser src="https://via.placeholder.com/100" alt="Foto do usuário" />
+        </Section>
 
-        <button onClick={() => navigate('/editar-usuario')}>
+        <Button onClick={() => navigate('/editar-usuario')}>
           Alterar dados
-        </button>
-      </main>
-    </div>
+        </Button>
+      </Main>
+    </Container>
   );
 }
