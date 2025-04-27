@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Camera from './pages/Camera';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import UserManagement from './pages/Administrador/UserManagement';
+import GerenciarUsuario from './pages/Administrador/GerenciarUsuario';
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
 import EmailEnviado from './pages/RecuperarSenha/EmailEnviado';
 import Relatorios from './pages/Administrador/relatorio';
@@ -23,7 +23,7 @@ function App() {
         <Route path="/camera" element={<Camera />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/user-management" element={<UserManagement />} />
+        <Route path="/gerenciar-usuarios" element={<GerenciarUsuario/>} />
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
         <Route path="/email-enviado" element={<EmailEnviado />} />
         <Route path="/nova-senha" element={<NovaSenha />} />

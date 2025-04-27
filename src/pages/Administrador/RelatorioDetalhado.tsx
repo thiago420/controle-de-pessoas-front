@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ⬅️ Importa o hook
 
+
 type Registro = {
   id: string;
   nome: string;

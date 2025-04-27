@@ -8,7 +8,7 @@ type MenuItem = {
 };
 
 const menuItems: MenuItem[] = [
-  { titulo: "Gerenciar Usuários", subtitulo: "Listar e modificar usuários", path: "/user-management" },
+  { titulo: "Gerenciar Usuários", subtitulo: "Listar e modificar usuários", path: "/gerenciar-usuarios" },
   { titulo: "Relatórios Detalhados", subtitulo: "Listar relatórios detalhados", path: "/relatorio-detalhado" },
   { titulo: "Relatórios", subtitulo: "Listar relatórios", path: "/relatorio" },
   { titulo: "Alertas", subtitulo: "Listar alertas", path: "/alerta" },

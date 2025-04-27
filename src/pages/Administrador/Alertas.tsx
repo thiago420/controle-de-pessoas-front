@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {Container,Header,HeaderTitle, HeaderActions,Button,Content,Filters,Table,TableHead,TableRow,TableCell,TableBody,TableButton,UserLabel,} from "./styles";
 
 type Alerta = {
   id: string;
@@ -26,44 +27,48 @@ const Alertas: React.FC = () => {
   const [filtrosAtivos, setFiltrosAtivos] = useState(false);
 
   return (
-    <div>
-     <header style={{ background: '#0b0e1b', color: '#fff', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2>Alertas</h2>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <button onClick={() => navigate('/menu-administrador')}>← Voltar para Menu Administrador</button>
-          <span>Administrador</span>
-        </div>
-      </header>
+    <Container>
+      <Header>
+        <HeaderTitle>Alertas</HeaderTitle>
+        <HeaderActions>
+          <Button onClick={() => navigate('/menu-administrador')}>← Voltar</Button>
+          <UserLabel>Administrador</UserLabel>
+        </HeaderActions>
+      </Header>
 
-      <div>
-        <button onClick={() => setFiltrosAtivos(!filtrosAtivos)}>
-          {filtrosAtivos ? 'Ocultar Filtros' : 'Filtros'}
-        </button>
-      </div>
+      <Content>
+        <Filters>
+          <Button onClick={() => setFiltrosAtivos(!filtrosAtivos)}>
+            {filtrosAtivos ? 'Ocultar Filtros' : 'Filtros'}
+          </Button>
+        </Filters>
 
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>TIPO ALERTA</th>
-            <th>MENSAGEM</th>
-            <th>DATA ALERTA</th>
-            <th>AÇÃO</th>
-          </tr>
-        </thead>
-        <tbody>
-          {alertasMock.map((alerta) => (
-            <tr key={alerta.id}>
-              <td>{alerta.id}</td>
-              <td>{alerta.tipo}</td>
-              <td>{alerta.mensagem}</td>
-              <td>{alerta.data}</td>
-              <td><button>＋</button></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        <Table>
+          <thead>
+            <TableRow>
+              <TableHead>ID</TableHead>
+              <TableHead>TIPO ALERTA</TableHead>
+              <TableHead>MENSAGEM</TableHead>
+              <TableHead>DATA ALERTA</TableHead>
+              <TableHead>AÇÃO</TableHead>
+            </TableRow>
+          </thead>
+          <TableBody>
+            {alertasMock.map((alerta) => (
+              <TableRow key={alerta.id}>
+                <TableCell>{alerta.id}</TableCell>
+                <TableCell>{alerta.tipo}</TableCell>
+                <TableCell>{alerta.mensagem}</TableCell>
+                <TableCell>{alerta.data}</TableCell>
+                <TableCell>
+                  <TableButton>＋</TableButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Content>
+    </Container>
   );
 };
 

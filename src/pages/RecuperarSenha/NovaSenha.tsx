@@ -17,7 +17,7 @@ const NovaSenha: React.FC = () => {
 
     console.log('Senha atualizada:', senha);
     alert('Senha alterada com sucesso!');
-    navigate('/');
+    navigate('/login');
   };
 
   return (

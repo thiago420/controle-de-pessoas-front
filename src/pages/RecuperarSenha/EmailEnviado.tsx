@@ -26,7 +26,7 @@ const EmailEnviado: React.FC = () => {
             required
           />
           <ButtonGroup>
-            <Button type="button" onClick={() => navigate('/')}>Voltar</Button>
+            <Button type="button" onClick={() => navigate('/login')}>Voltar</Button>
             <Button type="submit">Continuar</Button>
           </ButtonGroup>
         </Form>

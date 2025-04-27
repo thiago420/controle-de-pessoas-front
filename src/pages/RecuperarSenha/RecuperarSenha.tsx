@@ -27,7 +27,7 @@ const RecuperarSenha: React.FC = () => {
           />
           <ButtonGroup>
             <Button type="submit">Enviar</Button>
-            <Button type="button" onClick={() => navigate('/')}>Voltar</Button>
+            <Button type="button" onClick={() => navigate('/login')}>Voltar</Button>
           </ButtonGroup>
         </Form>
       </Card>
