@@ -14,6 +14,7 @@ import Alertas from './pages/Administrador/Alertas';
 import Usuario from './pages/Usuario/Usuario';
 import EditarUsuario from './pages/Usuario/EditarUsuario';
 import EditarEndereco from './pages/Usuario/EditarEndereco';
+import NovaSenha from './pages/RecuperarSenha/NovaSenha';
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/user-management" element={<UserManagement />} />
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
         <Route path="/email-enviado" element={<EmailEnviado />} />
+        <Route path="/nova-senha" element={<NovaSenha />} />
         <Route path="/relatorio" element={<Relatorios />} />
         <Route path="/relatorio-detalhado" element={<RelatorioDetalhado />} />
         <Route path="/alerta" element={<Alertas />} />

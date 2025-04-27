@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container, Card, Title, Description, Form, Input, Button, ButtonGroup } from './styles';
 
 const RecuperarSenha: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -7,26 +8,30 @@ const RecuperarSenha: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aqui você faria a chamada à API
     console.log('Email para recuperação:', email);
     navigate('/email-enviado');
   };
 
   return (
-    <div>
-      <h2>Recupere sua senha</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">E-mail:</label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
+    <Container>
+      <Card>
+        <Title>Recupere sua senha</Title>
+        <Description>Digite seu e-mail para enviarmos um código de recuperação.</Description>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="email"
+            placeholder="Insira seu e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <ButtonGroup>
+            <Button type="submit">Enviar</Button>
+            <Button type="button" onClick={() => navigate('/')}>Voltar</Button>
+          </ButtonGroup>
+        </Form>
+      </Card>
+    </Container>
   );
 };
 
