@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 150vh;
   background: url('/background.png') no-repeat center center; /* Troque para sua imagem */
   background-size: cover;
   display: flex;

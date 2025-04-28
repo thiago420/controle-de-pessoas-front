@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container, Header, HeaderLeft, HeaderRight, Content,
-  Filters, Table, Thead, Tbody, Th, Td, FotoButton
+  Filters, Table, Thead, Tbody, Th, Td,
 } from './styles'; // usa o styles.ts acima
 
 type Registro = {
@@ -69,7 +69,6 @@ const RelatorioDetalhado: React.FC = () => {
               <Th>Dt Entrada</Th>
               <Th>Dt Saída</Th>
               <Th>Acesso</Th>
-              <Th>Ver Foto</Th>
             </tr>
           </Thead>
           <Tbody>
@@ -80,7 +79,6 @@ const RelatorioDetalhado: React.FC = () => {
                 <Td>{registro.dtEntrada}</Td>
                 <Td>{registro.dtSaida}</Td>
                 <Td>{registro.acesso}</Td>
-                <Td><FotoButton>Foto</FotoButton></Td>
               </tr>
             ))}
           </Tbody>

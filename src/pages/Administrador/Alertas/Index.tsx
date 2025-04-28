@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Index.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -17,30 +18,23 @@ import {
   TableButton,
   UserLabel,
 } from "./styles";
-
-type Alerta = {
-  id: string;
-  tipo: string;
-  mensagem: string;
-  data: string;
-};
-
-const alertasMock: Alerta[] = [
-  { id: '0010', tipo: 'CHEGADA TARDIA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0009', tipo: 'USUÁRIO ANÔNIMO', mensagem: 'USUÁRIO ANÔNIMO ID: 47, NÃO IDENTIFICADO', data: '2025-05-12 09:30' },
-  { id: '0008', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0007', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0006', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0005', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0004', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0003', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0002', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-  { id: '0001', tipo: 'TENTATIVA ACESSO NEGADA', mensagem: 'USUÁRIO ID: 10, CHEGADA TARDIA, ACESSO NEGADO', data: '2025-05-12 09:30' },
-];
+import axios from "axios";
 
 const Alertas: React.FC = () => {
   const navigate = useNavigate();
   const [filtrosAtivos, setFiltrosAtivos] = useState(false);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [alertas, setAlertas] = useState<any>(null);
+
+ useEffect(() => {
+  const fetchData = async () => {
+    const response = await axios.get(`http://127.0.0.1:porta/api/alertas/empresa/?empresa_id=${localStorage.getItem('idEmpresa')}/`);
+    setAlertas(response.data);
+  }
+  fetchData();
+ }, [])
+ 
 
   return (
     <Container>
@@ -70,12 +64,12 @@ const Alertas: React.FC = () => {
             </TableRow>
           </thead>
           <TableBody>
-            {alertasMock.map((alerta) => (
+            {alertas.map((alerta: any) => (
               <TableRow key={alerta.id}>
                 <TableCell>{alerta.id}</TableCell>
-                <TableCell>{alerta.tipo}</TableCell>
-                <TableCell>{alerta.mensagem}</TableCell>
-                <TableCell>{alerta.data}</TableCell>
+                <TableCell>{alerta.tp_alerta}</TableCell>
+                <TableCell>{alerta.js_mensagem}</TableCell>
+                <TableCell>{alerta.dt_criado}</TableCell>
                 <TableCell>
                   <TableButton title="Ver detalhes">＋</TableButton>
                 </TableCell>
