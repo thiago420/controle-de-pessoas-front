@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ⬅️ Importa o hook
+import { useNavigate } from "react-router-dom"; 
+
 
 
 type Registro = {
