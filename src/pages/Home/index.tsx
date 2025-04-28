@@ -11,28 +11,37 @@ const Home = () => {
 		<>
 			<Header>
 				<div>
-					<img src="/logo.png" alt="Logo" height={50} />
+					<img src="/logo.png" alt="Logo" height={80} />
 				</div>
 				<div
 					style={{
 						display: 'flex',
 						flexDirection: 'row',
 						alignItems: 'center',
-						gap: '15px'
+						gap: '50px'
 					}}
 				>
 					<span>Utilize FacePass</span>
 					<span>Desenvolvedores</span>
 					<span>Junte-se a nós</span>
-					<button className="login">Login</button>
-					<button className="register">Cadastro</button>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							alignItems: 'center',
+							gap: '25px'
+						}}
+					>
+						<button className="login">Login</button>
+						<button className="register">Cadastro</button>
+					</div>
 				</div>
 			</Header>
 			<Main>
 				<Grid1>
 					<div className="div1">
-						<h1 style={{ fontSize: '3.5rem' }}>Gestão de Pessoas</h1>
-						<span style={{ fontSize: '1.2rem' }}>Este sistema utiliza tecnologia de reconhecimento facial para controlar o acesso a ambientes. Ele identifica automaticamente as pessoas, registrando seus acessos de forma rápida e segura, sem necessidade de senhas ou cartões.</span>
+						<h1>Gestão de Pessoas</h1>
+						<span>Este sistema utiliza tecnologia de reconhecimento facial para controlar o acesso a ambientes. Ele identifica automaticamente as pessoas, registrando seus acessos de forma rápida e segura, sem necessidade de senhas ou cartões.</span>
 					</div>
 					<div className="div2" style={{ height: '250px' }}>
 						<img src="/seila.png" width={350} style={{ position: 'absolute', right: '0' }} />
@@ -68,8 +77,12 @@ const Home = () => {
 					<Grid3>
 						<div className='card'>
 							<div className='links'>
-								<FaLinkedin size={35} />
-								<FaInstagramSquare size={35} />
+								<a href="https://www.linkedin.com/in/thiago-elias-antunes" target="_blank" rel="noopener noreferrer">
+									<FaLinkedin size={35} />
+								</a>
+								<a href="https://www.instagram.com/thiago.eliasc" target="_blank" rel="noopener noreferrer">
+									<FaInstagramSquare size={35} />
+								</a>
 							</div>
 							<div className='pessoa'>
 								<img src="/devs/thiago.jpg" />
@@ -81,8 +94,12 @@ const Home = () => {
 						</div>
 						<div className='card'>
 							<div className='links'>
-								<FaLinkedin size={35} />
-								<FaInstagramSquare size={35} />
+								<a href="https://www.linkedin.com/in/gabriel-silveira-tessari-202056351" target="_blank" rel="noopener noreferrer">
+									<FaLinkedin size={35} />
+								</a>
+								<a href="https://www.instagram.com/eo_tessari" target="_blank" rel="noopener noreferrer">
+									<FaInstagramSquare size={35} />
+								</a>
 							</div>
 							<div className='pessoa'>
 								<img src="/devs/tessari.jpg" />
@@ -94,8 +111,12 @@ const Home = () => {
 						</div>
 						<div className='card'>
 							<div className='links'>
-								<FaLinkedin size={35} />
-								<FaInstagramSquare size={35} />
+								<a href="https://www.linkedin.com/in/adrian-biehl-7a8100340" target="_blank" rel="noopener noreferrer">
+									<FaLinkedin size={35} />
+								</a>
+								<a href="https://www.instagram.com/adrianbiehl2011" target="_blank" rel="noopener noreferrer">
+									<FaInstagramSquare size={35} />
+								</a>
 							</div>
 							<div className='pessoa'>
 								<img src="/devs/adrian.jpg" />
@@ -107,21 +128,29 @@ const Home = () => {
 						</div>
 						<div className='card'>
 							<div className='links'>
-								<FaLinkedin size={35} />
-								<FaInstagramSquare size={35} />
+								<a href="https://www.linkedin.com/in/jos%C3%A9-vitor-masiero" target="_blank" rel="noopener noreferrer">
+									<FaLinkedin size={35} />
+								</a>
+								<a href="https://www.instagram.com/ovitorrdev" target="_blank" rel="noopener noreferrer">
+									<FaInstagramSquare size={35} />
+								</a>
 							</div>
 							<div className='pessoa'>
 								<img src="/devs/jose.jpg" />
 								<div className='nome'>
-									<h3>José Vitor Masieiro</h3>
+									<h3>José Vitor M. da Silva</h3>
 									<h4>Desenvolvedor Back-End</h4>
 								</div>
 							</div>
 						</div>
 						<div className='card'>
 							<div className='links'>
-								<FaLinkedin size={35} />
-								<FaInstagramSquare size={35} />
+								<a href="https://www.linkedin.com/in/pedro-henrique-cucker-santana-9720b4351" target="_blank" rel="noopener noreferrer">
+									<FaLinkedin size={35} />
+								</a>
+								<a href="https://www.instagram.com/santanapedro0105_" target="_blank" rel="noopener noreferrer">
+									<FaInstagramSquare size={35} />
+								</a>
 							</div>
 							<div className='pessoa'>
 								<img src="/devs/pedro.jpg" />
@@ -133,16 +162,17 @@ const Home = () => {
 						</div>
 					</Grid3>
 				</div>
+				<h1 style={{ marginTop: '100px' }}>Suporte</h1>
 			</Main>
 			<Footer>
 				<div>
 					<span>Entre em contato</span>
-					<span>+55 (48) 9 4002-8922</span>
+					<span>+55 (48) 9 9930-3001</span>
 				</div>
 				<div>
 					<span>Entre em contato</span>
-					<span>Av. Marcolino Martins Cabral, 184 - Centro, Tubarão - SC, 88701-001</span>
-				</div> 
+					<span>Rua Ferreira Lima, 373 - Centro, Tubarão - SC, 88701-305</span>
+				</div>
 			</Footer>
 		</>
 	)

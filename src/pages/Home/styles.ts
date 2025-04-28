@@ -29,7 +29,7 @@ export const Header = styled.header`
 
 	span {
 		color: #fff;
-		font-size: 16px;
+		font-size: 1.4rem;
 	}
 `;
 
@@ -46,10 +46,23 @@ export const Grid1 = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  margin: 200px 0;
+  
   gap: 8px;
     
-		.div1 {
-			grid-column: span 2 / span 2;
+	.div1 {
+		display: flex;
+		flex-direction: column;
+		grid-column: span 2 / span 2;
+
+		h1 {
+			font-size: 5rem;
+		}
+
+		span {
+			font-size: 2rem;
+			width: 60%;
+		}
 	}
 
 	.div2 {
@@ -116,6 +129,11 @@ export const Grid3 = styled.div`
 			display: flex;
 			flex-direction: row;
 			gap: 10px;
+
+			a {
+				all: unset;
+				cursor: pointer;
+			}
 		}
 
 		div.pessoa {
@@ -139,9 +157,14 @@ export const Footer = styled.footer`
 	display: flex;
 	flex-direction: column;
   	gap: 20px;
-	align-items: center;
-	padding: 30px 35px;
+	padding: 30px 100px;
 	width: 100%;
 	background-color: #413838;
+	color: #fff;
 	font-family: 'Inter';
+
+	div {
+		display: flex;
+		flex-direction: column;
+	}
 `;

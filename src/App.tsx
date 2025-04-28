@@ -11,6 +11,9 @@ import RelatorioDetalhado from './pages/Administrador/RelatorioDetalhado';
 import MenuAdministrador from './pages/Administrador/MenuAdministrador';
 import Alertas from './pages/Administrador/Alertas/Index';
 import Usuario from './pages/Usuario/Usuario';
+import './styles/App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 function App() {
   return (
     <>
