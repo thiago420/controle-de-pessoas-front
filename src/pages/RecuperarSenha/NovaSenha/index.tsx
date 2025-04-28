@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Card, Title, Form, Input, Button } from './styles';
+import { Container, Card, Title, Form, Input, Button } from '../styles';
 
 const NovaSenha: React.FC = () => {
   const [senha, setSenha] = useState('');

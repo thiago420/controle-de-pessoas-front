@@ -16,18 +16,18 @@ const EmailEnviado: React.FC = () => {
     <Container>
       <Card>
         <Title>Recupere sua senha</Title>
-        <Description>Insira o código que enviamos para seu e-mail para confirmar sua identidade.</Description>
+        <Description>Enviamos um código para seu e-mail, confirme o código no campo abaixo.</Description>
         <Form onSubmit={handleSubmit}>
           <Input
             type="text"
-            placeholder="Digite o código recebido"
+            placeholder="Insira o código enviado"
             value={codigo}
             onChange={(e) => setCodigo(e.target.value)}
             required
           />
           <ButtonGroup>
             <Button type="button" onClick={() => navigate('/login')}>Voltar</Button>
-            <Button type="submit">Continuar</Button>
+            <Button type="submit" primary>Continuar</Button>
           </ButtonGroup>
         </Form>
       </Card>

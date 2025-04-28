@@ -1,6 +1,22 @@
+// Index.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Container,Header,HeaderTitle, HeaderActions,Button,Content,Filters,Table,TableHead,TableRow,TableCell,TableBody,TableButton,UserLabel,} from "./styles";
+import {
+  Container,
+  Header,
+  HeaderTitle,
+  HeaderActions,
+  Button,
+  Content,
+  Filters,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableButton,
+  UserLabel,
+} from "./styles";
 
 type Alerta = {
   id: string;
@@ -61,7 +77,7 @@ const Alertas: React.FC = () => {
                 <TableCell>{alerta.mensagem}</TableCell>
                 <TableCell>{alerta.data}</TableCell>
                 <TableCell>
-                  <TableButton>＋</TableButton>
+                  <TableButton title="Ver detalhes">＋</TableButton>
                 </TableCell>
               </TableRow>
             ))}

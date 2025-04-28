@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-
-
+import { useNavigate } from "react-router-dom";
+import {
+  Container, Header, HeaderLeft, HeaderRight, Content,
+  Filters, Table, Thead, Tbody, Th, Td, FotoButton
+} from './styles'; // usa o styles.ts acima
 
 type Registro = {
   id: string;
@@ -21,7 +23,7 @@ const registrosMock: Registro[] = [
 ];
 
 const RelatorioDetalhado: React.FC = () => {
-  const navigate = useNavigate(); // ⬅️ Inicializa o hook
+  const navigate = useNavigate();
 
   const [nomeFiltro, setNomeFiltro] = useState("");
   const [acessoFiltro, setAcessoFiltro] = useState("");
@@ -33,19 +35,19 @@ const RelatorioDetalhado: React.FC = () => {
   });
 
   return (
-    <div>
-      <header style={{ background: '#0b0e1b', color: '#fff', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2>Relatório Detalhado</h2>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <button onClick={() => navigate('/menu-administrador')}>← Voltar para Menu Administrador</button>
+    <Container>
+      <Header>
+        <HeaderLeft>Relatório Detalhado</HeaderLeft>
+        <HeaderRight>
+          <button onClick={() => navigate('/menu-administrador')}>← Menu</button>
           <span>Administrador</span>
-        </div>
-      </header>
+        </HeaderRight>
+      </Header>
 
-      <section>
+      <Content>
         <h2>Dia: 2025-04-25</h2>
 
-        <div>
+        <Filters>
           <input
             type="text"
             placeholder="Filtrar por nome"
@@ -57,34 +59,34 @@ const RelatorioDetalhado: React.FC = () => {
             <option value="PERMITIDO">Permitido</option>
             <option value="NEGADO">Negado</option>
           </select>
-        </div>
-      </section>
+        </Filters>
 
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Dt Entrada</th>
-            <th>Dt Saída</th>
-            <th>Acesso</th>
-            <th>Ver Foto</th>
-          </tr>
-        </thead>
-        <tbody>
-          {registrosFiltrados.map((registro, index) => (
-            <tr key={index}>
-              <td>{registro.id}</td>
-              <td>{registro.nome}</td>
-              <td>{registro.dtEntrada}</td>
-              <td>{registro.dtSaida}</td>
-              <td>{registro.acesso}</td>
-              <td><button>Foto</button></td>
+        <Table>
+          <Thead>
+            <tr>
+              <Th>ID</Th>
+              <Th>Nome</Th>
+              <Th>Dt Entrada</Th>
+              <Th>Dt Saída</Th>
+              <Th>Acesso</Th>
+              <Th>Ver Foto</Th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </Thead>
+          <Tbody>
+            {registrosFiltrados.map((registro, index) => (
+              <tr key={index}>
+                <Td>{registro.id}</Td>
+                <Td>{registro.nome}</Td>
+                <Td>{registro.dtEntrada}</Td>
+                <Td>{registro.dtSaida}</Td>
+                <Td>{registro.acesso}</Td>
+                <Td><FotoButton>Foto</FotoButton></Td>
+              </tr>
+            ))}
+          </Tbody>
+        </Table>
+      </Content>
+    </Container>
   );
 };
 

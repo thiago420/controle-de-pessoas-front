@@ -1,77 +1,89 @@
-// src/pages/RecuperarSenha/styles.ts
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-image: url('/background.png'); // Substitua pelo seu fundo real
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: #041a28; /* Fundo escuro */
 `;
 
 export const Card = styled.div`
-  background: #d9d9d9;
-  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 50px 40px;
   border-radius: 20px;
-  width: 400px;
-  max-width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  width: 90%;
+  max-width: 400px;
 `;
 
-export const Title = styled.h2`
-  font-size: 24px;
+export const Title = styled.h1`
+  font-size: 28px;
   font-weight: bold;
-  text-align: center;
   margin-bottom: 10px;
+  text-align: center;
+  color: #000;
 `;
 
 export const Description = styled.p`
   font-size: 14px;
-  text-align: center;
   color: #333;
+  margin-bottom: 30px;
+  text-align: center;
 `;
 
 export const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 `;
 
 export const Input = styled.input`
   width: 100%;
-  padding: 12px 15px;
-  border-radius: 10px;
+  padding: 12px 16px;
   border: 1px solid #ccc;
-  outline: none;
-  font-size: 14px;
-`;
-
-export const Button = styled.button`
-  width: 100%;
-  background-color: #4181f7;
-  color: white;
-  padding: 12px 0;
-  border: none;
   border-radius: 10px;
-  font-weight: bold;
   font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  outline: none;
+  transition: border-color 0.3s;
 
-  &:hover {
-    background-color: #3166c4;
+  &:focus {
+    border-color: #007bff;
   }
 `;
 
 export const ButtonGroup = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+`;
+
+export const Button = styled.button`
+  width: 100%;
+  padding: 12px 0;
+  background-color: #2c70f5;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #1955c8;
+  }
+
+  &:nth-child(2) {
+    background-color: #65aef5;
+    &:hover {
+      background-color: #3c8ee6;
+    }
+  }
 `;
